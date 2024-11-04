@@ -1,22 +1,36 @@
 <!doctype html>
 <html>
-  <head>
-    <title>example-element examples</title>
-    <link href="https://unpkg.com/fiber-htmx@1.3.32/dist/out.css" rel="stylesheet">
-  </head>
-  <body>
-    <div class="container py-4">
-      <example-element></example-element>
-    </div>
-    <script>
-      const script = document.createElement('script')
-      if (window.location.hostname.endsWith('github.io') || window.location.hostname.endsWith('github.com')) {
-        script.src = "https://unpkg.com/example-element@latest/dist/index.js"
-      } else {
-        script.src = "../dist/index.js"
-      }
-      script.type = 'module'
-      document.body.appendChild(script)
-    </script>
-  </body>
+
+<head>
+  <title>key-value-elements examples</title>
+  <link href="https://unpkg.com/fiber-htmx@1.3.32/dist/out.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container py-4">
+    <key-value-elements name="tags">
+      <template>
+        <div class="form-group">
+          <label for="key">Key</label>
+          <input type="text" id="key" name="key" class="form-control" required>
+        </div>
+      </template>
+      <div>
+        <input type="text" name="tags.0.name" is="key-value" data-kv-group="tags" data-kv-key required>
+        <input type="text" name="tags.0.value" is="key-value" data-kv-groups="tags" data-kv-value>
+      </div>
+    </key-value-elements>
+  </div>
+  <script>
+    const script = document.createElement('script')
+    if (window.location.hostname.endsWith('github.io') || window.location.hostname.endsWith('github.com')) {
+      script.src = "https://unpkg.com/key-value-element@latest/dist/index.js"
+    } else {
+      script.src = "../dist/index.js"
+    }
+    script.type = 'module'
+    document.body.appendChild(script)
+  </script>
+</body>
+
 </html>

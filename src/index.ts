@@ -2,25 +2,47 @@ export {}
 
 declare global {
   interface Window {
-    ExampleElement: typeof ExampleElement
+    KeyValueElement: typeof KeyValueElements
   }
   interface HTMLElementTagNameMap {
-    'example-element': ExampleElement
+    'key-value-elements': KeyValueElements
+    'key-value-element': KeyValueElement
   }
 }
 
-export class ExampleElement extends HTMLElement {
+type KeyValue = {
+  key: string
+  value: string
+}
+
+const elements = new Array<KeyValue>()
+
+export class KeyValueElements extends HTMLElement {
+  constructor() {
+    super()
+  }
+
+  connectedCallback() {}
+}
+
+export const defineExampleElement = () => {
+  customElements.define('key-value-element', KeyValueElements)
+}
+
+customElements.define('key-value-elements', KeyValueElements)
+
+export class KeyValueElement extends HTMLElement {
   constructor() {
     super()
   }
 
   connectedCallback() {
-    this.textContent = 'Hello, World!'
+    const key = document.querySelector('input[data-key-index]') as HTMLTemplateElement
+    const value = document.querySelector('input[data-value-index]') as HTMLTemplateElement
+
+
+    elements.push({key: key, value: 'value'})
   }
 }
 
-customElements.define('example-element', ExampleElement)
-
-export const defineExampleElement = () => {
-  customElements.define('example-element', ExampleElement)
-}
+customElements.define('key-value-element', KeyValueElement)
